@@ -2,14 +2,16 @@ import { DataStore } from './data/data'
 import express from 'express';
 const app = express();
 
-console.log('tours:', DataStore.tours)
+// FORMATTING OF JSON
+// console.log('tours:', JSON.parse(JSON.stringify(DataStore.tours)))
+
 // TEST ROUTES : 
 app.get('/', (req, res, next) => {
   res.send("Tour Booking API")
 })
 
 app.get('/tours', (req, res, next) => {
-  res.send("Get a list of tours...")
+  res.send(DataStore.tours)
 })
 
 app.post('/tours', (req, res, next) => {
