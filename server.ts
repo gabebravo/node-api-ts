@@ -1,22 +1,19 @@
 import { DataStore } from './data/data'
+import { apiGetTours } from "./api/tours/apiGetTours";
+import { apiGetTourDetail } from "./api/tours/apiGetTourDetail";
+
 import express from 'express';
 const app = express();
 
-// FORMATTING OF JSON
-// console.log('tours:', JSON.parse(JSON.stringify(DataStore.tours)))
-
-// TEST ROUTES : 
+// TEST ROUTE : 
 app.get('/', (req, res, next) => {
   res.send("Tour Booking API")
 })
 
-app.get('/tours', (req, res, next) => {
-  res.send(DataStore.tours)
-})
+// GET TOURS API ROUTES
+app.get("/tours", apiGetTours);
 
-app.post('/tours', (req, res, next) => {
-  res.send("Add a new tour...")
-})
+app.get("/tours/:id", apiGetTourDetail);
 
 app.listen(process.env.PORT || 8091, () => {
   console.log('Server started...')
