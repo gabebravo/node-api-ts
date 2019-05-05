@@ -2,6 +2,7 @@ import { apiGetTours } from "./api/tours/apiGetTours";
 import { apiGetTourDetail } from "./api/tours/apiGetTourDetail";
 import { apiCreateTour } from "./api/tours/apiCreateTour";
 import { apiDeleteTour } from "./api/tours/apiDeleteTour";
+import { apiUpdateTour } from "./api/tours/apiUpdateTour";
 
 import express from 'express';
 const app = express();
@@ -23,6 +24,9 @@ app.post('/tours', jsonParser, apiCreateTour)
 
 // DELETE API ROUTE
 app.delete("/tours/:id", apiDeleteTour);
+
+// PATCH API ROUTE
+app.patch("/tours/:id", jsonParser, apiUpdateTour);
 
 app.listen(process.env.PORT || 8091, () => {
   console.log('Server started...')
