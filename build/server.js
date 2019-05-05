@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const apiGetTours_1 = require("./api/tours/apiGetTours");
 const apiGetTourDetail_1 = require("./api/tours/apiGetTourDetail");
 const apiCreateTour_1 = require("./api/tours/apiCreateTour");
+const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const express_1 = __importDefault(require("express"));
 const app = express_1.default();
 const bodyParser = __importStar(require("body-parser"));
@@ -24,8 +25,10 @@ app.get('/', (req, res, next) => {
 // GET API ROUTES
 app.get("/tours", apiGetTours_1.apiGetTours);
 app.get("/tours/:id", apiGetTourDetail_1.apiGetTourDetail);
-// POST API ROUTES - jsonParser arg is passed in as middleware (will run each time first)
+// POST API ROUTE - jsonParser arg is passed in as middleware (will run each time first)
 app.post('/tours', jsonParser, apiCreateTour_1.apiCreateTour);
+// DELETE API ROUTE
+app.delete("/tours/:id", apiDeleteTour_1.apiDeleteTour);
 app.listen(process.env.PORT || 8091, () => {
     console.log('Server started...');
 });

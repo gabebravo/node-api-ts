@@ -1,7 +1,7 @@
-import { DataStore } from './data/data'
 import { apiGetTours } from "./api/tours/apiGetTours";
 import { apiGetTourDetail } from "./api/tours/apiGetTourDetail";
 import { apiCreateTour } from "./api/tours/apiCreateTour";
+import { apiDeleteTour } from "./api/tours/apiDeleteTour";
 
 import express from 'express';
 const app = express();
@@ -18,8 +18,11 @@ app.get('/', (req, res, next) => {
 app.get("/tours", apiGetTours);
 app.get("/tours/:id", apiGetTourDetail);
 
-// POST API ROUTES - jsonParser arg is passed in as middleware (will run each time first)
+// POST API ROUTE - jsonParser arg is passed in as middleware (will run each time first)
 app.post('/tours', jsonParser, apiCreateTour)
+
+// DELETE API ROUTE
+app.delete("/tours/:id", apiDeleteTour);
 
 app.listen(process.env.PORT || 8091, () => {
   console.log('Server started...')
