@@ -14,6 +14,7 @@ const apiGetTours_1 = require("./api/tours/apiGetTours");
 const apiGetTourDetail_1 = require("./api/tours/apiGetTourDetail");
 const apiCreateTour_1 = require("./api/tours/apiCreateTour");
 const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
+const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const express_1 = __importDefault(require("express"));
 const app = express_1.default();
 const bodyParser = __importStar(require("body-parser"));
@@ -29,6 +30,8 @@ app.get("/tours/:id", apiGetTourDetail_1.apiGetTourDetail);
 app.post('/tours', jsonParser, apiCreateTour_1.apiCreateTour);
 // DELETE API ROUTE
 app.delete("/tours/:id", apiDeleteTour_1.apiDeleteTour);
+// PATCH API ROUTE
+app.patch("/tours/:id", jsonParser, apiUpdateTour_1.apiUpdateTour);
 app.listen(process.env.PORT || 8091, () => {
     console.log('Server started...');
 });
