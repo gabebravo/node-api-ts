@@ -17,8 +17,18 @@ const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
 const express_1 = __importDefault(require("express"));
 const app = express_1.default();
+const logger = (req, res, next) => {
+    console.log(`${new Date()} - ${req.method} Request to ${req.path}`);
+    next();
+};
 const bodyParser = __importStar(require("body-parser"));
 const jsonParser = bodyParser.json();
+// INTERACTING MIDDLEWARE  - will change req/res objects
+const 
+// MIDDLEWARE FUNCTION WILL RUN EVERY TIME
+app, use;
+(logger);
+// if you wanted it just for a ceratin route, you could define that as the first arg - exmaple '/tours'
 // TEST ROUTE : 
 app.get('/', (req, res, next) => {
     res.send("Tour Booking API");
