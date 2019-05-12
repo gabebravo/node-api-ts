@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const data_1 = require("../../data/data");
+const messages_1 = require("../../model/shared/messages");
 exports.apiUpdateTour = (req, res, next) => {
     const tourID = req.params.id;
     const tourIndex = data_1.DataStore.tours.findIndex((item) => item.id == tourID);
@@ -16,9 +17,9 @@ exports.apiUpdateTour = (req, res, next) => {
             currency: req.body.currency || originalTour.currency
         };
         data_1.DataStore.tours[tourIndex] = newTour;
-        res.json({ "status": "success", "message": "Element updated" });
+        res.json(new messages_1.PublicInfo("Tour Updated", 200));
     }
     else {
-        res.json({ "status": "error", "message": "Element not found" });
+        return next(new messages_1.ApiError("Validation Error", "Tour Not Found", 400));
     }
 };

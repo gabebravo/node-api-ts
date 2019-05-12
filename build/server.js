@@ -18,7 +18,7 @@ const logger = morgan_1.default('dev');
 const bodyParser = __importStar(require("body-parser"));
 const jsonParser = bodyParser.json();
 // const urlEncodedParser = bodyParser.urlencoded({ extended: true })
-// MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
+// PRE-MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
 app.use(logger);
 // IMPORTED ROUTES
 const apiGetTours_1 = require("./api/tours/apiGetTours");
@@ -26,6 +26,7 @@ const apiGetTourDetail_1 = require("./api/tours/apiGetTourDetail");
 const apiCreateTour_1 = require("./api/tours/apiCreateTour");
 const apiDeleteTour_1 = require("./api/tours/apiDeleteTour");
 const apiUpdateTour_1 = require("./api/tours/apiUpdateTour");
+const errorHandling_1 = require("./api/general/errorHandling");
 // TEST ROUTE : 
 app.get('/', (req, res, next) => {
     res.send("Tour Booking API");
@@ -40,6 +41,8 @@ app.post('/tours', jsonParser, apiCreateTour_1.apiCreateTour);
 app.delete("/tours/:id", apiDeleteTour_1.apiDeleteTour);
 // PATCH API ROUTE
 app.patch("/tours/:id", jsonParser, apiUpdateTour_1.apiUpdateTour);
+// POST-MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
+app.use(errorHandling_1.apiErrorHandler);
 app.listen(process.env.PORT || 8091, () => {
     console.log('Server started...');
 });

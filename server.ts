@@ -8,7 +8,7 @@ import * as bodyParser from 'body-parser';
 const jsonParser = bodyParser.json()
 // const urlEncodedParser = bodyParser.urlencoded({ extended: true })
 
-// MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
+// PRE-MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
 app.use(logger) 
 
 // IMPORTED ROUTES
@@ -17,6 +17,7 @@ import { apiGetTourDetail } from "./api/tours/apiGetTourDetail";
 import { apiCreateTour } from "./api/tours/apiCreateTour";
 import { apiDeleteTour } from "./api/tours/apiDeleteTour";
 import { apiUpdateTour } from "./api/tours/apiUpdateTour";
+import { apiErrorHandler } from './api/general/errorHandling';
 
 // TEST ROUTE : 
 app.get('/', (req, res, next) => {
@@ -36,6 +37,9 @@ app.delete("/tours/:id", apiDeleteTour);
 
 // PATCH API ROUTE
 app.patch("/tours/:id", jsonParser, apiUpdateTour);
+
+// POST-MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
+app.use(apiErrorHandler) 
 
 app.listen(process.env.PORT || 8091, () => {
   console.log('Server started...')
