@@ -1,7 +1,9 @@
-const jsonTours = require("./tours.json");
-const jsonReviews = require("./reviews.json");
+import jsonTours from "./tours.json";
+import jsonReviews from "./reviews.json";
 
 export class DataStore {
     static tours = jsonTours;
     static reviews = jsonReviews;
 }
+
+

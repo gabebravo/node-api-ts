@@ -6,6 +6,7 @@ import morgan from 'morgan'
 const logger = morgan('dev')
 import * as bodyParser from 'body-parser';
 const jsonParser = bodyParser.json()
+// const urlEncodedParser = bodyParser.urlencoded({ extended: true })
 
 // MIDDLEWARE FUNCTIONS WILL RUN EVERY TIME
 app.use(logger) 
@@ -28,6 +29,7 @@ app.get("/tours/:id", apiGetTourDetail);
 
 // POST API ROUTE - jsonParser arg is passed in as middleware (will run each time first)
 app.post('/tours', jsonParser, apiCreateTour)
+// app.post('/tours', urlEncodedParser, apiCreateTour) - FOR URL ENCODING
 
 // DELETE API ROUTE
 app.delete("/tours/:id", apiDeleteTour);
